@@ -1,0 +1,10 @@
+# Sitio estático: se publica el contenido de web/ tal cual, sin paso de build.
+[build]
+  publish = "web"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    X-Robots-Tag = "noindex"

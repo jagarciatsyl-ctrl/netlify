@@ -1,0 +1,9 @@
+:root { color-scheme: light dark; }
+body { font: 16px/1.5 system-ui, sans-serif; margin: 0; }
+main { max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+form { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+input { padding: .4rem .6rem; }
+button { padding: .4rem .9rem; cursor: pointer; }
+ul { list-style: none; padding: 0; }
+li { padding: .5rem .75rem; border: 1px solid #8884; border-radius: 8px; margin: .4rem 0; }
+.estado { opacity: .7; font-size: .9em; }

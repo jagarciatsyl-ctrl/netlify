@@ -1,0 +1,7 @@
+# Cambios en CI/CD, despliegue, dependencias y tests protegidos exigen revisión del propietario.
+/.github/                 @jagarciatsyl-ctrl
+/netlify.toml             @jagarciatsyl-ctrl
+/requirements-dev.txt     @jagarciatsyl-ctrl
+/pytest.ini               @jagarciatsyl-ctrl
+/tests/aceptacion/        @jagarciatsyl-ctrl
+/.dorothy/                @jagarciatsyl-ctrl
