@@ -1,0 +1,64 @@
+# CI del proyecto piloto (la sube el usuario: la GitHub App NO tiene permiso sobre workflows).
+# Secretos de la preview: entorno "preview" del repo (NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID).
+name: CI
+
+on:
+  push:
+    branches: [main, "feature/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secretos:
+    name: secretos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - run: pip install -r requirements-dev.txt
+      - run: python -m playwright install --with-deps chromium
+      - run: pytest -q --junitxml=informe-aceptacion.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: informe-aceptacion
+          path: informe-aceptacion.xml
+
+  preview:
+    name: preview
+    needs: test
+    # Only for branches of this repo (agents' PRs): forks never see the preview secrets.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    environment: preview
+    steps:
+      - uses: actions/checkout@v4
+      - name: Desplegar la preview en Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          npx --yes netlify-cli@17 deploy --dir=web --alias "pr-${{ github.event.number }}" \
+            --site "$NETLIFY_SITE_ID" --auth "$NETLIFY_AUTH_TOKEN" \
+            --message "PR ${{ github.event.number }} ${{ github.event.pull_request.head.sha }}"
