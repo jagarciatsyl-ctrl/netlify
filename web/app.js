@@ -32,6 +32,13 @@ document.getElementById("nueva").addEventListener("submit", (e) => {
   tareas.push({ titulo, estado: "Pendiente" });
   campo.value = "";
   pintar();
+  renderContador();
 });
 
+function renderContador() {
+  const pendientes = tareas.filter((t) => t.estado !== "Hecha").length;
+  document.getElementById("contador-pendientes").textContent = "Pendientes: " + pendientes;
+}
+
 pintar();
+renderContador();
