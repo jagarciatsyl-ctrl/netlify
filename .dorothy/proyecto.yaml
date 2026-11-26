@@ -1,12 +1,12 @@
 # Ficha del proyecto para Dorothy (plan sección 13). `scripts/piloto publicar` rellena el repo y el sitio.
 clave: PILOTO
-nombre: Piloto · lista de tareas
+nombre: Piloto · web de piscinas
 repo: "jagarciatsyl-ctrl/netlify"
 forja: github
 rama_integracion: main
 stack:
   tipo: html-js-estatico
-  tests_aceptacion: [pytest-bdd, playwright-python]
+  tests_aceptacion: [pytest, playwright-python]
 revision_externa: ninguna
 conjunto_protegido:            # solo Espantapájaros puede modificarlo
   - "tests/aceptacion/**"

@@ -1,7 +1,6 @@
 # Guía
 
-Esta guía describe cómo usar la lista de tareas del piloto.
+Esta guía describe la web de piscinas del piloto.
 
 1. Abre la página.
-2. Escribe el título de una tarea nueva y pulsa «Añadir».
-3. La tarea aparece al final de la lista con el estado «Pendiente».
+2. De momento solo muestra el título y «Sitio en construcción».
