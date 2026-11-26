@@ -1,0 +1,12 @@
+html { scroll-behavior: auto; }
+body { margin: 0; padding-top: 72px; background-color: #0a1a2f; color: #e8f4fc; font-family: system-ui, sans-serif; }
+header { position: fixed; top: 0; left: 0; right: 0; height: 72px; z-index: 1000; box-sizing: border-box; padding: 0 24px; display: flex; align-items: center; gap: 24px; background-color: #0a1a2f; }
+header img { height: 48px; width: 48px; margin-right: auto; }
+nav { display: flex; gap: 20px; }
+header a { color: #e8f4fc; text-decoration: none; }
+header a.whatsapp { background: #25d366; color: #0a1a2f; padding: 8px 16px; border-radius: 20px; font-weight: bold; }
+section { background-color: #0a1a2f; box-sizing: border-box; padding: 24px; min-height: 80vh; scroll-margin-top: 88px; }
+#splash { min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+footer { background-color: #0a1a2f; padding: 24px; display: flex; align-items: center; gap: 24px; }
+footer img { height: 48px; width: 48px; margin-right: auto; }
+footer a { color: #e8f4fc; }
