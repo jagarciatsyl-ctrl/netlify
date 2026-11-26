@@ -1,7 +1,7 @@
-# Cambios en CI/CD, despliegue, dependencias y tests protegidos exigen revisión del propietario.
+# Solo lo que puede cambiar cómo se construye, se prueba o se despliega exige la revisión del propietario.
+# El resto de cambios (web, pruebas de aceptación, docs) los revisa el sistema (Glinda, Toto, Dorothy) y los
+# aprueba el propietario al fusionar. Los tests protegidos los vigila el supervisor con hashes, no esta lista.
 /.github/                 @jagarciatsyl-ctrl
 /netlify.toml             @jagarciatsyl-ctrl
 /requirements-dev.txt     @jagarciatsyl-ctrl
 /pytest.ini               @jagarciatsyl-ctrl
-/tests/aceptacion/        @jagarciatsyl-ctrl
-/.dorothy/                @jagarciatsyl-ctrl
