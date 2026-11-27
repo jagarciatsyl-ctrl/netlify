@@ -60,6 +60,11 @@ def miniaturas(p):
     return seccion(p).locator("img:not([role=dialog] img)")
 
 
+def ver_seccion(p):
+    assert seccion(p).count() == 1, "No existe la sección con título «Galería»"
+    seccion(p).scroll_into_view_if_needed(timeout=3000)
+
+
 def visor(p):
     return p.get_by_role("dialog")
 
@@ -71,25 +76,26 @@ def _abierta(galeria):
 
 @given("que la página está abierta con una ventana de 1280 px de ancho y la sección «Galería» está visible")
 def _abierta_visible(galeria):
-    seccion(galeria).scroll_into_view_if_needed(timeout=3000)
+    ver_seccion(galeria)
 
 
 @given("que la sección «Galería» muestra las 6 imágenes")
 def _seis(galeria):
-    seccion(galeria).scroll_into_view_if_needed(timeout=3000)
+    ver_seccion(galeria)
     assert miniaturas(galeria).count() == 6
 
 
 @given("que una imagen está ampliada en la ventana superpuesta")
 def _ampliada(galeria):
-    seccion(galeria).scroll_into_view_if_needed(timeout=3000)
+    ver_seccion(galeria)
+    assert miniaturas(galeria).count() == 6, "No hay 6 miniaturas"
     miniaturas(galeria).first.click(timeout=3000)
     assert visor(galeria).is_visible()
 
 
 @when("la persona se desplaza hasta la sección con el título «Galería»")
 def _scroll(galeria):
-    seccion(galeria).scroll_into_view_if_needed(timeout=3000)
+    ver_seccion(galeria)
 
 
 @when("la persona espera a que termine la carga de la página")
@@ -99,11 +105,13 @@ def _espera(galeria):
 
 @when("la persona hace clic en la primera imagen")
 def _clic_primera(galeria):
+    assert miniaturas(galeria).count() >= 1, "No hay miniaturas"
     miniaturas(galeria).first.click(timeout=3000)
 
 
 @when("la persona hace clic en el botón «Cerrar»")
 def _clic_cerrar(galeria):
+    assert visor(galeria).is_visible(), "No hay ventana superpuesta"
     visor(galeria).get_by_role("button", name="Cerrar").click(timeout=3000)
 
 
